@@ -21,7 +21,7 @@ public class LoginController {
 	LoginService loginService;
 	
 	@RequestMapping(value= "/login", method= RequestMethod.GET)
-	public String showLogin() {
+	public String showLogin(ModelMap model) {
 		
 		//model.put("name", name);
 		
