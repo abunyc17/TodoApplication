@@ -1,5 +1,7 @@
 package com.abunyc.springboot.Todo.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +32,19 @@ public class TodoController {
 		model.put("todo", todoService.retrieveTodo(userId));
 		
 		return "todo-list";
+	}
+	
+	@RequestMapping(value= "/add-todo", method= RequestMethod.GET)
+	public String showAddTodo() {	
+		return "add-todo";
+	}
+	
+	@RequestMapping(value = "/add-todo", method= RequestMethod.POST)
+	public String performTodo(ModelMap model,@RequestParam String userId, @RequestParam String desc, @RequestParam Date targetDate, @RequestParam boolean isDone) {
+		
+		todoService.addTodo(userId, desc,targetDate, isDone);
+		
+		return "redirect:/todo-list";
 	}
 	
 
