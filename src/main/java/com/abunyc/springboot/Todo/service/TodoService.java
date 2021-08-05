@@ -5,12 +5,15 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.abunyc.springboot.Todo.model.Todo;
 
 /**
  * @author Abu
  */
 
+@Service
 public class TodoService {
 	
 	private static  List<Todo> todos = new ArrayList<>();

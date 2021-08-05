@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.abunyc.springboot.Todo.service.LoginService;
+import com.abunyc.springboot.Todo.service.TodoService;
 
 /**
  * @author Abu
@@ -17,34 +18,20 @@ import com.abunyc.springboot.Todo.service.LoginService;
 
 @Controller
 @SessionAttributes("name")
-public class LoginController {
+public class TodoController {
 	
 	@Autowired
-	LoginService loginService;
+	TodoService todoService;
 	
-	@RequestMapping(value= "/login", method= RequestMethod.GET)
-	public String showLogin(ModelMap model) {
+	@RequestMapping(value= "/todo-list", method= RequestMethod.GET)
+	public String showTodo(ModelMap model) {
 		
-		//model.put("name", name);
+		String userId = (String)model.get("name");
+		model.put("todo", todoService.retrieveTodo(userId));
 		
-		return "login";
+		return "todo-list";
 	}
 	
-	@RequestMapping(value= "/login", method= RequestMethod.POST)
-	public String showWelcome(ModelMap model, @RequestParam String name, @RequestParam String password) {
-		
-		boolean isValidCredentials = loginService.validateDetails(name, password);
-		
-		if(!isValidCredentials) {
-			model.put("errorMessage", "Invalid Credentials");
-			return "login";
-		}
-		
-		model.put("name", name);
-		model.put("pword", password);
-		
-		return "welcome";
-	}
 
 }
 
